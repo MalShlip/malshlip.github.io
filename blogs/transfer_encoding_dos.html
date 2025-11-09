@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>MalShlip | Transfer-Encoding HTTP DoS</title>
+		<!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+		<style>
+			body {
+				background-color: #222222;
+				color: white;
+			}
+			
+			a {
+				color: cyan;
+			}
+			
+			.mls-logo {
+				cursor: pointer;
+				width: 512px;
+				height: 512px;
+			}
+			
+			.content-box {
+				width: 512px;
+				border: 1px solid white;
+				background-color: gray;
+			}
+		</style>
+	</head>
+	<body>
+		<img id="mlslogo" class="mls-logo" src="mlslogo.png" alt="malshlip logo">
+		<script>
+			document.getElementById('mlslogo').addEventListener('click', () => {
+				window.location.href = "index.html";
+			});
+		</script>
+		<h1>Transfer-Encoding HTTP DoS</h1>
+		<p>
+			Transfer-Encoding HTTP Denial Of Service is a technique where the attacker abuses<br>
+			the HTTP protocol's (Transfer-Encoding) header to launch a Denial Of Service attack.<br>
+			All the attacker has to do is to craft a specific HTTP request like the one below and send it:<br>
+			
+			<div class="content-box">
+			POST /some-endpoint HTTP/1.1<br>
+			Host: example.com<br>
+			Transfer-Encoding: chunked<br><br>
+			
+			10\r\n<br>
+			HGSXCZSQNP\r\n
+			</div><br>
+			
+			This will make the server's endpoint wait for chunked responses until the end chunk is provided.<br>
+			The end chunk is a chunk which contains a zero followed by a carriage return and a newline.<br><br>
+		
+			Let's say the attacker sends the same chunk we saw in the request above per minute:<br><br>
+			
+			<div class="content-box">			
+			10\r\n<br>
+			HGSXCZSQNP\r\n
+			</div><br>
+			
+			This will force the server to hold the connection open as it waits for the end chunk, which the<br>
+			attacker never provides.<br><br>
+			
+			This also allows for low and slow attacks as the attacker can wait extremely long intervals<br>
+			before submitting the next chunk while never providing the end chunk.<br><br>
+			
+			Transfer-Encoding HTTP Denial Of Service does NOT work on the HTTP 2 and 3 protocols as the Transfer-Encoding header<br>
+			is disallowed. 
+		</p>
+	</body>
+</html>
+
