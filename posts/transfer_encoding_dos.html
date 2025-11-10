@@ -37,9 +37,9 @@
 		</script>
 		<h1>Transfer-Encoding HTTP DoS</h1>
 		<p>
-			Transfer-Encoding HTTP Denial Of Service is a technique where the attacker abuses<br>
-			the HTTP protocol's (Transfer-Encoding) header to launch a Denial Of Service attack.<br>
-			All the attacker has to do is to craft a specific HTTP request like the one below and send it:<br>
+			Transfer-Encoding Denial Of Service is a technique where the attacker abuses the HTTP protocol's Transfer-Encoding header<br>
+			to launch a Denial Of Service attack. All the attacker has to do is to craft a specific HTTP request like the one below and<br>
+			send it to their target:<br>
 			
 			<div class="content-box">
 			POST /some-endpoint HTTP/1.1<br>
@@ -50,8 +50,8 @@
 			HGSXCZSQNP\r\n
 			</div><br>
 			
-			This will make the server's endpoint wait for chunked responses until the end chunk is provided.<br>
-			The end chunk is a chunk which contains a zero followed by a carriage return and a newline.<br><br>
+			This will allow the server and client to stream chunk encoded responses to each other until the terminating chunk is provided.<br>
+			The terminating chunk is a chunk which contains a zero followed by a carriage return and a newline.<br><br>
 		
 			Let's say the attacker sends the same chunk we saw in the request above per minute:<br><br>
 			
@@ -60,15 +60,15 @@
 			HGSXCZSQNP\r\n
 			</div><br>
 			
-			This will force the server to hold the connection open as it waits for the end chunk, which the<br>
+			This will force the server to hold the connection open as it waits for the terminating chunk, which the<br>
 			attacker never provides.<br><br>
+
+			Transfer-Encoding Denial Of Service is a variant of the R.U.D.Y. (R U Dead Yet?) attack, but rather depends on<br>
+			any endpoint accepting the Transfer-Encoding header rather than just pure web form data.<br><br>
 			
-			This also allows for low and slow attacks as the attacker can wait extremely long intervals<br>
-			before submitting the next chunk while never providing the end chunk.<br><br>
-			
-			Transfer-Encoding HTTP Denial Of Service does NOT work on the HTTP 2 and 3 protocols as the Transfer-Encoding header<br>
-			is disallowed. 
+			Although such an attack may stand effective against HTTP servers, HTTP servers running HTTP 2, 3 or later<br>
+			are protected against this attack as the Transfer-Encoding header is disallowed and any request depending on<br>
+			it will be provided with a protocol error.
 		</p>
 	</body>
 </html>
-
