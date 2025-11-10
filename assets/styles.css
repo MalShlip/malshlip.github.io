@@ -20,6 +20,7 @@ a {
 }
 			
 .content-box {
+	text-align: start;
 	width: 512px;
 	border: 1px solid white;
 	background-color: gray;
