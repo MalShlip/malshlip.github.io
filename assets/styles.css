@@ -4,22 +4,22 @@ body {
     align-items: center;
     flex-direction: column;
     margin: 0;
-		background-color: #222222;
+	background-color: #222222;
     color: white;
 }
 			
 a {
-		color: cyan;
+	color: cyan;
 }
 			
 .mls-logo {
-		cursor: pointer;
-		width: 512px;
+	cursor: pointer;
+	width: 512px;
     height: 512px;
 }
 			
 .content-box {
-		width: 512px;
-		border: 1px solid white;
-		background-color: gray;
+	width: 512px;
+	border: 1px solid white;
+	background-color: gray;
 }
