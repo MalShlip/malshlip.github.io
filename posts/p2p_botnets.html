@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>MalShlip | Peer To Peer Botnets</title>
+		<!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
+		<link rel="stylesheet" type="text/css" href="../assets/styles.css">
+	</head>
+	<body>
+		<img id="mlslogo" class="mls-logo" src="../assets/mlslogo.png" alt="malshlip logo">
+		<script>
+			document.getElementById('mlslogo').addEventListener('click', () => {
+				window.location.href = "../index.html";
+			});
+		</script>
+		<h1>IPv6 Peer-To-Peer Botnets</h1>
+		<p>
+		We are usually used to this representation of P2P botnets:<br>
+		
+		<img src="p2p_botnet_figure_1.png" alt="p2p botnet figure"><br>
+		
+		Now there are lots of issues with this model, especially with IPv4. BUT...<br>
+		since the IPv6 protocol is just getting more and more adopted into networking infrastructure,<br>
+		this model may actually be slightly correct. Because of the issue with IPv4 not having<br>
+		enough space to assign an IP address to all devices on the internet, we invented NAT and<br> 
+		later IPv6. NAT works by assigning a private IP address to a device on a local<br>
+		network, this assigning process is done by a router which then forwards traffic from that device<br>
+		via its own public IP address to the internet. This removes the need for all devices<br>
+		to have their own public IP addresses which fixes the IPv4 spacing issue. IPv6 was another<br>
+		solution, rather than to use 32 bit addresses IPv6 uses 128 bit addresses which<br>
+		increased available space by a lot (2^128 to be exact). Since IPv6 provides the<br>
+		device with a public IP address, it bypasses the need to configure port forwarding<br>
+		manually via router settings (or UPnP, etc.) to expose a device's service to the internet.<br>
+		Botnet operators and attackers can and have abused IPv6 for this exact purpose, to bypass NAT restrictions for P2P<br>
+		infrastructure and command & control.<br><br>
+		
+		Although a strict firewall may be able to block specific ports and suspicious traffic,<br>
+		I have noticed that attackers cleverly get around this by literally just configuring the<br>
+		firewall themselves via some stupid powershell or netsh.exe, but since this requires administrative<br>
+		privileges an attacker still needs to find a way to elevate themselves which they usually do anyway.<br><br>
+		
+		IPv6 is a good protocol and me myself is looking forward to its growth, but because IPv6 still is a new<br>
+		kid on the block I would recommend disabling it if you don't really need it for your own security.
+		</p>
+	</body>
+</html>
